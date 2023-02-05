@@ -12,6 +12,18 @@ async function insertUserDetails(details){
     return "ok";
 
 }
+async function getUsers(){
+    mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+    db = mongo.db("test");
+    let res = await db.collection('users').find({}).toArray();
+    
+    mongo.close();
+    return res;
+    
+    }
+
+
+
 const express = require('express');
 const app = express();
 
@@ -29,3 +41,11 @@ app.get('/api/send-register', (req, res) => {
   const message = insertUserDetails(JSON.parse(inputValue));
   res.send({ message });
 });
+
+app.get('/api/getusers',async (req, res) => {
+    // console.log("helloworld");
+    
+     const message =await getUsers();
+     console.log(message);
+     res.send(JSON.stringify(message));
+   });
