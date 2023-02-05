@@ -15,8 +15,8 @@ async function callSomeFunction() {
       email:email,
       phone:phone
     }
-    alert(inputdetails['name']);
+    //alert(inputdetails['name']);
     const response = await fetch(`/api/send-register?value=${JSON.stringify(inputdetails)}`);
     const data = await response.json();
-    console.log(data.message);
+    alert(data);
   }

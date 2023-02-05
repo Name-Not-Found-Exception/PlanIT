@@ -2,7 +2,9 @@ async function getList(){
     const response = await fetch('/api/getusers');
     const data = await response.json();
     //console.log(data.message[0]['name']);
-    const users = data.message;
+    
+    const users = data;
+    console.log(data);
     users.forEach(i => {
 
         console.log(i['name']);

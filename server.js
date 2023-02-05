@@ -9,7 +9,7 @@ async function insertUserDetails(details){
     db = mongo.db("test");
     await db.collection('users').insertOne(details);
     mongo.close();
-    return "ok";
+    return "Sign in successfull";
 
 }
 async function getUsers(){
