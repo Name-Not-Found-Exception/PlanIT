@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="test1.js"></script>
+   <!-- <script>
+    
+    
+   </script> -->
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"] {
+        width: 50%;
+        height: 35px;
+        margin: 10px 0;
+        padding-left: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        width: 20%;
+        height: 40px;
+        margin-top: 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" onsubmit= "return window.submit()">
+      <h2>Sign Up</h2>
+      <input id="name" type="text" placeholder="Name" required>
+      <input id="email" type="email" placeholder="Email" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <input id="phoneno" type="tel" placeholder="Phone Number" required >
+      <input type="submit" value="Submit">
+      <input type="Button" value="Submit" onclick="window.submit()">
+    </form>
+  </body>
+</html>
