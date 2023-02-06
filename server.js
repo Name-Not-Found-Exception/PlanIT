@@ -29,6 +29,15 @@ async function insertEvent(data){
   return "Sign in successfull";
 }
 
+async function getEvents(){
+
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  let res = await db.collection('events').find({}).toArray();
+  
+  mongo.close();
+  return res;
+}
 
     const multer = require('multer');
     const path = require('path');
@@ -58,7 +67,7 @@ app.get('/api/getusers',async (req, res) => {
      console.log(message);
      res.send(JSON.stringify(message));
    });
-   const upload = multer({ dest: 'uploads/' });
+   const upload = multer({ dest: 'public/uploads/' });
    app.use(express.json());
    app.use(express.urlencoded({ extended: true }));
    
@@ -80,4 +89,12 @@ result = insertEvent(eventdata);
 
 
      res.send(result);
+   });
+
+   app.get('/api/getevents',async (req, res) => {
+    // console.log("helloworld");
+    
+     const message =await getEvents();
+     console.log(message);
+     res.send(JSON.stringify(message));
    });
