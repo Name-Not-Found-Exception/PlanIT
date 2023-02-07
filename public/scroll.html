@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <script src="eventlist.js"></script>
+    <style>
+      /* Add styles for card */
+      .card {
+        width: 200px;
+        height: 350px;
+        display: inline-block;
+        margin: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  /* Add styles for event name */
+  .card h3 {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  /* Add styles for organizer name */
+  .card p.organizer {
+    padding: 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Add styles for date and time */
+  .card p.date{
+    padding: 10px;
+    text-align: center;
+    font-size: smaller;
+  }
+  .card p.time{
+    padding: 10px;
+    text-align: center;
+    font-size: smaller;
+  }
+
+  /* Add styles for card on hover */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
+  .scrollcard{
+    display: flex; overflow-x: scroll;
+  }
+</style>
+</head>
+<body>
+  <h1 style="text-align: center;">Events</h1>
+  <div class="scrollcard" id="cardsection">
+    <!-- Event 1 -->
+    <div class="card">
+      <img src="event1_cover.jpg" alt="Event 1 Cover">
+      <h3>Event 1</h3>
+      <p class="organizer">Organizer: John Doe</p>
+      <p class="date">Date: 01-01-2023 </p>
+      <p class ="time">Time: 11:00 AM</p>
+      <p class ="time">Location : MBCET</p>
+    </div>
+     <!-- Event 2 -->
+  <div class="card">
+    <img src="event2_cover.jpg" alt="Event 2 Cover">
+    <h3>Event 2</h3>
+    <p class="organizer">Organizer: Jane Doe</p>
+    <p class="date">Date: 02-01-2023</p>
+    <p class ="time">Time: 11:00 AM</p>
+    <p class ="time">Location : MBCET</p>
+  </div>
+
+  <!-- Add more events as needed -->
+</div>
+</body>
+</html>

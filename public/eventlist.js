@@ -9,10 +9,11 @@ async function getList(){
         //console.log(i['image']['filename']);
         console.log(i['title']);
         var table= document.getElementById("cardsection");
-        table.innerHTML += `<div class=\"event-card\">
+        table.innerHTML += `<div class=\"card\">
         <img src = "http://localhost:3000/uploads/${i['image']['filename']}"
         >
         <h3>${i['title']}</h3>
+        <p>${i['organizer']}</p>
         <p>${i['location']}</p>
         <p>${i['date']}</p>
         <p>${i['time']}</p>
@@ -43,11 +44,3 @@ async function getList(){
     //   </div>
 }
 getList();
-function leftScroll() {
-    const left = document.querySelector(".events-section");
-    left.scrollBy(200, 0);
-  }
-  function rightScroll() {
-    const right = document.querySelector(".events-section");
-    right.scrollBy(-200, 0);
-  }

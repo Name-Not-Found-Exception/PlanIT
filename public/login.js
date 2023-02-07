@@ -5,18 +5,34 @@ async function callSomeFunction() {
   }
 
   async function signUp() {
-    let name = document.getElementById('name').value;
-    let pass = document.getElementById('password').value;
-    let email = document.getElementById('email').value;
-    let phone = document.getElementById('phoneno').value;
+    let name = document.getElementById('regname').value.trim();
+    let pass = document.getElementById('regpassword').value.trim();
+    let email = document.getElementById('regemail').value.toLowerCase().trim();
+    let phone = document.getElementById('regphoneno').value.trim();
     const inputdetails = {
       name:name,
       password:pass,
       email:email,
       phone:phone
     }
+    console.log(inputdetails);
     //alert(inputdetails['name']);
     const response = await fetch(`/api/send-register?value=${JSON.stringify(inputdetails)}`);
     const data = await response.json();
-    alert(data);
+    alert(data.message);
+  }
+
+  async function login() {
+    let mail = document.getElementById('logmail').value;
+    let pass = document.getElementById('logpassword').value;
+    const loginCred = {
+      email:mail,
+      password:pass
+    }
+    const response = await fetch(`/api/send-login?value=${JSON.stringify(loginCred)}`);
+    const data = await response.json();
+    alert(data.message);
+    if(data.message = "Signup successfull"){
+      window.location.href = 'scroll.html'
+    }
   }

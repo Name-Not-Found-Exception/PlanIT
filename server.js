@@ -4,12 +4,24 @@ let mongo;
 let db;
 
 const fs = require('fs');
-async function insertUserDetails(details){
+async function insertUserDetails(userDetails){
+
+    let isok = false;
+    
+    
     mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
     db = mongo.db("test");
-    await db.collection('users').insertOne(details);
+    console.log(userDetails['email']);
+    const givenmail = userDetails['email'];
+    user = await db.collection('users').find({"email": givenmail}).limit(1).toArray();
+    console.log(user);
+    if(user.length==0){
+    await db.collection('users').insertOne(userDetails);
     mongo.close();
-    return "Sign in successfull";
+    return "Signup successfull";
+    }
+    else
+    return "email already exist"
 
 }
 async function getUsers(){
@@ -42,6 +54,12 @@ async function getEvents(){
   return res;
 }
 
+
+
+async function checkCred(cred){
+
+}
+
     const multer = require('multer');
     const path = require('path');
 
@@ -55,11 +73,12 @@ app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
 
-app.get('/api/send-register', (req, res) => {
+app.get('/api/send-register',async (req, res) => {
  // console.log("helloworld");
   const inputValue = req.query.value;
-  console.log(JSON.parse(inputValue)['name']);
-  const message = insertUserDetails(JSON.parse(inputValue));
+  const userdetails = JSON.parse(inputValue);
+  console.log(userdetails['email']);
+  const message =await insertUserDetails(userdetails);
   res.send({ message });
 });
 
@@ -101,4 +120,12 @@ result = insertEvent(eventdata);
      const message =await getEvents();
      console.log(message);
      res.send(JSON.stringify(message));
+   });
+
+   app.get('/api/send-login',async (req, res) => {
+    // console.log("helloworld");
+     const inputValue = req.query.value;
+     console.log(JSON.parse(inputValue)['name']);
+     //const message =await insertUserDetails(JSON.parse(inputValue));
+     res.send({ message });
    });
