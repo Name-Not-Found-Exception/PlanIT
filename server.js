@@ -18,12 +18,37 @@ async function insertUserDetails(userDetails){
     if(user.length==0){
     await db.collection('users').insertOne(userDetails);
     mongo.close();
+    curUser =  user[0];
     return "Signup successful";
     }
     else
     return "email already exist"
 
 }
+
+async function insertOrgDetails(orgDetails){
+
+  let isok = false;
+  
+  
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  console.log(orgDetails['email']);
+  const givenmail = orgDetails['email'];
+  user = await db.collection('organizers').find({"email": givenmail}).limit(1).toArray();
+  console.log(user);
+  if(user.length==0){
+  await db.collection('organizers').insertOne(orgDetails);
+  mongo.close();
+  return "Signup successful";
+  }
+  else
+  return "email already exist"
+
+}
+
+
+
 async function getUsers(){
     mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
     db = mongo.db("test");
@@ -80,6 +105,32 @@ async function login(cred){
     return "incorrect password"
   }
 }
+
+async function orgLogin(cred){
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  console.log(cred["email"]);
+  const givenmail = cred['email'];
+  user = await db.collection('organizers').find({"email": givenmail}).limit(1).toArray();
+  console.log(user);
+  if(user.length==0){
+  return "User not found";
+  }
+  else
+  {
+    console.log(user[0]['password']);
+    console.log(console.log(user[0]['password\n']));
+    if(cred['password'] == user[0]['password']){
+    curUser =  user[0];
+    console.log('current user '+curUser['name']);
+    return "Login Successful";
+    
+    }
+    else
+    return "incorrect password"
+  }
+}
+
 
     const multer = require('multer');
     const path = require('path');
@@ -148,5 +199,16 @@ result = insertEvent(eventdata);
      const inputValue = req.query.value;
      console.log(JSON.parse(inputValue)['name']);
      const message =await login(JSON.parse(inputValue));
+     res.send({ message });
+   });
+
+
+
+   app.get('/api/org-register',async (req, res) => {
+    // console.log("helloworld");
+     const inputValue = req.query.value;
+     const userdetails = JSON.parse(inputValue);
+     console.log(userdetails['email']);
+     const message =await insertOrgDetails(userdetails);
      res.send({ message });
    });
