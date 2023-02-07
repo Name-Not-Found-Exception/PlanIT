@@ -9,10 +9,11 @@
           method: 'POST',
           body: formData
         });
-
-        if (response.ok) {
-          console.log('Event created successfully');
-        } else {
-          console.error('Failed to create event');
+        console.log(response.status);
+        if(response.status==200){
+          alert('Event registered successfully');
+          window.location.href = 'orghome.html';
         }
+        else
+        alert('Event name is taken');
       }

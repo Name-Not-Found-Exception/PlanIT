@@ -9,7 +9,7 @@ async function getList(){
         //console.log(i['image']['filename']);
         console.log(i['title']);
         var table= document.getElementById("cardsection");
-        table.innerHTML += `<div class=\"card\">
+        table.innerHTML += `<div id = \"${i[name]}\" class=\"card\">
         <img  src = "http://localhost:3000/uploads/${i['image']['filename']}"
         >
         <h3 >${i['title']}</h3>

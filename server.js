@@ -18,7 +18,7 @@ async function insertUserDetails(userDetails){
     if(user.length==0){
     await db.collection('users').insertOne(userDetails);
     mongo.close();
-    curUser =  user[0];
+    curUser =  userDetails;
     return "Signup successful";
     }
     else
@@ -40,7 +40,9 @@ async function insertOrgDetails(orgDetails){
   if(user.length==0){
   await db.collection('organizers').insertOne(orgDetails);
   mongo.close();
+   curUser = orgDetails;
   return "Signup successful";
+ 
   }
   else
   return "email already exist"
@@ -62,9 +64,14 @@ async function insertEvent(data){
  
   mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
   db = mongo.db("test");
+  isexist = await db.collection('events').find({title: data['title']}).limit(1).toArray();
+  if(isexist.length==0){
   await db.collection('events').insertOne(data);
   mongo.close();
-  return " successfull";
+  return 200;
+  }
+  else
+  return 403;
   
 
 }
@@ -170,12 +177,12 @@ app.get('/api/getusers',async (req, res) => {
      const message =await getUsers();
      console.log(message);
      res.send(JSON.stringify(message));
-   });
+});
    const upload = multer({ dest: 'public/uploads/' });
    app.use(express.json());
    app.use(express.urlencoded({ extended: true }));
    
-   app.post('/api/events', upload.single('image'), (req, res) => {
+app.post('/api/events', upload.single('image'),async (req, res) => {
 const { eventTitle, location, date, time } = req.body;
 const image = req.file;
 let result;
@@ -190,20 +197,21 @@ console.log(eventTitle);
   organizer:curUser['name']
 }
 console.log(eventdata);
-result = insertEvent(eventdata);
+ message =await insertEvent(eventdata);
 
 
+      console.log(message);
+      res.sendStatus(message);
 
-     res.send(result);
    });
 
-   app.get('/api/getevents',async (req, res) => {
+  app.get('/api/getevents',async (req, res) => {
     // console.log("helloworld");
-    
-     const message =await getEvents();
-     console.log(message);
-     res.send(JSON.stringify(message));
-   });
+
+    const message =await getEvents();
+    console.log(message);
+    res.send(JSON.stringify(message));
+  });
 
    app.get('/api/send-login',async (req, res) => {
     // console.log("helloworld");
