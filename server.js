@@ -2,7 +2,7 @@ const {MongoClient} = require("mongodb");
 
 let mongo;
 let db;
-
+let curUser = {};
 const fs = require('fs');
 async function insertUserDetails(userDetails){
 
@@ -18,7 +18,7 @@ async function insertUserDetails(userDetails){
     if(user.length==0){
     await db.collection('users').insertOne(userDetails);
     mongo.close();
-    return "Signup successfull";
+    return "Signup successful";
     }
     else
     return "email already exist"
@@ -56,8 +56,29 @@ async function getEvents(){
 
 
 
-async function checkCred(cred){
-
+async function login(cred){
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  console.log(cred["email"]);
+  const givenmail = cred['email'];
+  user = await db.collection('users').find({"email": givenmail}).limit(1).toArray();
+  console.log(user);
+  if(user.length==0){
+  return "User not found";
+  }
+  else
+  {
+    console.log(user[0]['password']);
+    console.log(console.log(user[0]['password\n']));
+    if(cred['password'] == user[0]['password']){
+    curUser =  user[0];
+    console.log('current user '+curUser['name']);
+    return "Login Successful";
+    
+    }
+    else
+    return "incorrect password"
+  }
 }
 
     const multer = require('multer');
@@ -126,6 +147,6 @@ result = insertEvent(eventdata);
     // console.log("helloworld");
      const inputValue = req.query.value;
      console.log(JSON.parse(inputValue)['name']);
-     //const message =await insertUserDetails(JSON.parse(inputValue));
+     const message =await login(JSON.parse(inputValue));
      res.send({ message });
    });

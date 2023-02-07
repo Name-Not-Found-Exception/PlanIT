@@ -20,10 +20,12 @@ async function callSomeFunction() {
     const response = await fetch(`/api/send-register?value=${JSON.stringify(inputdetails)}`);
     const data = await response.json();
     alert(data.message);
+    if(data.message=="Signup successful")
+    window.location.href = 'scroll.html'
   }
 
   async function login() {
-    let mail = document.getElementById('logmail').value;
+    let mail = document.getElementById('logmail').value.trim().toLowerCase();
     let pass = document.getElementById('logpassword').value;
     const loginCred = {
       email:mail,
@@ -32,7 +34,7 @@ async function callSomeFunction() {
     const response = await fetch(`/api/send-login?value=${JSON.stringify(loginCred)}`);
     const data = await response.json();
     alert(data.message);
-    if(data.message = "Signup successfull"){
+    if(data.message == "Login Successful"){
       window.location.href = 'scroll.html'
     }
   }

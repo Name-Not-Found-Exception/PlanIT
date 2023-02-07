@@ -10,13 +10,13 @@ async function getList(){
         console.log(i['title']);
         var table= document.getElementById("cardsection");
         table.innerHTML += `<div class=\"card\">
-        <img src = "http://localhost:3000/uploads/${i['image']['filename']}"
+        <img  src = "http://localhost:3000/uploads/${i['image']['filename']}"
         >
-        <h3>${i['title']}</h3>
-        <p>${i['organizer']}</p>
-        <p>${i['location']}</p>
-        <p>${i['date']}</p>
-        <p>${i['time']}</p>
+        <h3 >${i['title']}</h3>
+        <p class=\"organizer\" >Organizer : ${i['organizer']}</p>
+        <p class=\"time\" >Venue : ${i['location']}</p>
+        <p class=\"date\" >date : ${i['date']}</p>
+        <p class=\"time\" >time : ${i['time']}</p>
         </div>`;
         console.log(table.innerHTML);
         // table.innerHTML += "<tr><td> " + i['title'] + "</td><td>"
