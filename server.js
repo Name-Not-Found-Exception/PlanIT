@@ -22,11 +22,14 @@ async function getUsers(){
     
     }
 async function insertEvent(data){
+ 
   mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
   db = mongo.db("test");
   await db.collection('events').insertOne(data);
   mongo.close();
-  return "Sign in successfull";
+  return " successfull";
+  
+
 }
 
 async function getEvents(){
@@ -84,6 +87,7 @@ console.log(eventTitle);
   time:time,
   image:image
 }
+console.log(eventdata);
 result = insertEvent(eventdata);
 
 

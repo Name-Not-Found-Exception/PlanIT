@@ -6,14 +6,23 @@ async function getList(){
     const events = data;
     console.log(data);
     events.forEach(i => {
-
+        //console.log(i['image']['filename']);
         console.log(i['title']);
-        var table= document.getElementById("eventtable");
-        table.innerHTML += "<tr><td> " + i['title'] + "</td><td>"
-         +i['location'] + "</td><td>"
-         +i['date'] + "</td><td>"
-         +i['time'] + "</td><td><img width =100 src = \"http://localhost:3000/uploads/"
-         +i['image']['filename'] + "\"></td></tr>";
+        var table= document.getElementById("cardsection");
+        table.innerHTML += `<div class=\"event-card\">
+        <img src = "http://localhost:3000/uploads/${i['image']['filename']}"
+        >
+        <h3>${i['title']}</h3>
+        <p>${i['location']}</p>
+        <p>${i['date']}</p>
+        <p>${i['time']}</p>
+        </div>`;
+        console.log(table.innerHTML);
+        // table.innerHTML += "<tr><td> " + i['title'] + "</td><td>"
+        //  +i['location'] + "</td><td>"
+        //  +i['date'] + "</td><td>"
+        //  +i['time'] + "</td><td><img width =250 src = \"http://localhost:3000/uploads/"
+        //  +i['image']['filename'] + "\"></td></tr>";
          
 
     //      <tr>
@@ -24,5 +33,21 @@ async function getList(){
     //      <td><img src="image1.jpg" height="50"></td>
     //    </tr>
     });
+
+    // <div class="event-card">
+    //     <img src="event1.jpg" alt="Event 1">
+    //     <h3>Event 1</h3>
+    //     <p>Location: Location 1</p>
+    //     <p>Date: 2023-03-01</p>
+    //     <p>Time: 19:00</p>
+    //   </div>
 }
 getList();
+function leftScroll() {
+    const left = document.querySelector(".events-section");
+    left.scrollBy(200, 0);
+  }
+  function rightScroll() {
+    const right = document.querySelector(".events-section");
+    right.scrollBy(-200, 0);
+  }
