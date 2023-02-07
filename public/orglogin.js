@@ -17,12 +17,12 @@
     const data = await response.json();
     alert(data.message);
     if(data.message=="Signup successful")
-    window.location.href = 'scroll.html';
+    window.location.href = 'orghome.html';
   }
 
   async function login() {
     let mail = document.getElementById('logmail').value.trim().toLowerCase();
-    let pass = document.getElementById('logpassword').value;
+    let pass = document.getElementById('logpass').value;
     const loginCred = {
       email:mail,
       password:pass
@@ -31,6 +31,6 @@
     const data = await response.json();
     alert(data.message);
     if(data.message == "Login Successful"){
-      window.location.href = 'scroll.html'
+      window.location.href = 'orghome.html'
     }
   }

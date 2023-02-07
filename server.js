@@ -2,7 +2,7 @@ const {MongoClient} = require("mongodb");
 
 let mongo;
 let db;
-let curUser = {};
+var curUser = {};
 const fs = require('fs');
 async function insertUserDetails(userDetails){
 
@@ -75,6 +75,16 @@ async function getEvents(){
   db = mongo.db("test");
   let res = await db.collection('events').find({}).toArray();
   
+  mongo.close();
+  return res;
+}
+
+async function getEventsOrg(){
+
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  let res = await db.collection('events').find({organizer:curUser['name']}).toArray();
+  console.log(curUser['name']);
   mongo.close();
   return res;
 }
@@ -176,7 +186,8 @@ console.log(eventTitle);
   location:location,
   date:date,
   time:time,
-  image:image
+  image:image,
+  organizer:curUser['name']
 }
 console.log(eventdata);
 result = insertEvent(eventdata);
@@ -211,4 +222,20 @@ result = insertEvent(eventdata);
      console.log(userdetails['email']);
      const message =await insertOrgDetails(userdetails);
      res.send({ message });
+   });
+
+   app.get('/api/org-login',async (req, res) => {
+    // console.log("helloworld");
+     const inputValue = req.query.value;
+     console.log(JSON.parse(inputValue)['name']);
+     const message =await orgLogin(JSON.parse(inputValue));
+     res.send({ message });
+   });
+
+   app.get('/api/geteventsorg',async (req, res) => {
+    // console.log("helloworld");
+    
+     const message =await getEventsOrg();
+     console.log(message);
+     res.send(JSON.stringify(message));
    });
