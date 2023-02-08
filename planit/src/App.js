@@ -5,18 +5,42 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <script src="public\test1.js"></script>
+   <!-- <script>
+    
+    
+   </script> -->
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"] {
+        width: 50%;
+        height: 35px;
+        margin: 10px 0;
+        padding-left: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        width: 20%;
+        height: 40px;
+        margin-top: 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+      }
       </header>
     </div>
   );
