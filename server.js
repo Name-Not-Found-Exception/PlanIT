@@ -41,7 +41,7 @@ async function insertOrgDetails(orgDetails){
   await db.collection('organizers').insertOne(orgDetails);
   mongo.close();
    curUser = orgDetails;
-  return "Signup successful";
+  return "Signup succes                              sful";
  
   }
   else
@@ -122,6 +122,15 @@ async function login(cred){
     return "incorrect password"
   }
 }
+function curUserNoPass(){
+  const curusernopass = {
+    name:curUser['name'],
+    email:curUser['email'],
+    phone:curUser['phone']
+
+  };
+  return curusernopass;
+}
 
 async function orgLogin(cred){
   mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
@@ -149,7 +158,7 @@ async function orgLogin(cred){
 }
 
 
-    const multer = require('multer');
+    const multer = require('multer');  
     const path = require('path');
 
 const express = require('express');
@@ -246,4 +255,11 @@ console.log(eventdata);
      const message =await getEventsOrg();
      console.log(message);
      res.send(JSON.stringify(message));
+   });
+
+   app.get('/api/addusertoevent',async (req, res) => {
+    // console.log("helloworld");
+     const inputValue = req.query.value;
+     console.log(inputValue);
+     res.send( 'message' );
    });

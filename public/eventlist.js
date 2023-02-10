@@ -1,3 +1,13 @@
+let eventList;
+
+async function register(id){
+console.log(id);
+const response = await fetch(`/api/addusertoevent?value=${id}`);
+    const data = await response.json();
+    console.log(data.message);
+}
+
+
 async function getList(){
     const response = await fetch('/api/getevents');
     const data = await response.json();
@@ -5,6 +15,7 @@ async function getList(){
     
     const events = data;
     console.log(data);
+    eventList = events;
     events.forEach(i => {
         //console.log(i['image']['filename']);
         console.log(i['title']);
@@ -14,11 +25,18 @@ async function getList(){
         >
         <h3 >${i['title']}</h3>
         <p class=\"organizer\" >Organizer : ${i['organizer']}</p>
-        <p class=\"time\" >Venue : ${i['location']}</p>
-        <p class=\"date\" >date : ${i['date']}</p>
-        <p class=\"time\" >time : ${i['time']}</p>
+        <p class=\"time\" >Venue : ${i['location']}\n
+         date : ${i['date']}\n
+         time : ${i['time']}</p>
+        <button id=\"${i['title']}\" class = \"buttonjoin\" align="center" type = \"button\" value = \"Join\">Register</button>
         </div>`;
-        console.log(table.innerHTML);
+        var buttons = document.getElementsByTagName("button");
+for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function(e) {
+        console.log(this.id);
+        register(this.id);
+    });
+}
         // table.innerHTML += "<tr><td> " + i['title'] + "</td><td>"
         //  +i['location'] + "</td><td>"
         //  +i['date'] + "</td><td>"
