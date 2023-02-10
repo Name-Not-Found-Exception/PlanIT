@@ -123,6 +123,7 @@ async function login(cred){
   }
 }
 function curUserNoPass(){
+  console.log(curUser['name']);
   const curusernopass = {
     name:curUser['name'],
     email:curUser['email'],
@@ -155,6 +156,19 @@ async function orgLogin(cred){
     else
     return "incorrect password"
   }
+}
+
+async function insertUsertoEvent(ename){
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  const usernopass = curUserNoPass();
+  check = await db.collection(`${ename}`).find({"email": usernopass['email']}).limit(1).toArray();
+  
+  console.log(usernopass['name']);
+  if(check.length==0){
+  await db.collection(`${ename}`).insertOne(usernopass);
+  }
+  else return "Already registered";
 }
 
 
@@ -261,5 +275,7 @@ console.log(eventdata);
     // console.log("helloworld");
      const inputValue = req.query.value;
      console.log(inputValue);
-     res.send( 'message' );
+     await insertUsertoEvent(inputValue);
+     message = "Registered Successfully"
+     res.send({message});
    });

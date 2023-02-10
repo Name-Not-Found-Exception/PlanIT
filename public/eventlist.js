@@ -3,7 +3,7 @@ let eventList;
 async function register(id){
 console.log(id);
 const response = await fetch(`/api/addusertoevent?value=${id}`);
-    const data = await response.json();
+    const data = await response;
     console.log(data.message);
 }
 
