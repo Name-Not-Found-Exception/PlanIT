@@ -3,6 +3,7 @@ const {MongoClient} = require("mongodb");
 let mongo;
 let db;
 var curUser = {};
+let eventId=0;
 const fs = require('fs');
 async function insertUserDetails(userDetails){
 
@@ -176,7 +177,15 @@ async function insertUsertoEvent(ename){
   else return 208;
 }
 
-
+async function getParticipants(){
+  mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
+  db = mongo.db("test");
+  console.log("id is "+eventId);
+  let list = await db.collection(eventId).find({}).toArray();
+  
+  mongo.close();
+  return list;
+}
     const multer = require('multer');  
     const path = require('path');
 
@@ -283,4 +292,20 @@ console.log(eventdata);
      const reply= await insertUsertoEvent(inputValue);
      
      res.sendStatus(reply);
+   });
+
+   app.get('/api/setselectedevent',async (req, res) => {
+    // console.log("helloworld");
+     const inputValue = req.query.value;
+     console.log(inputValue);
+     eventId =  inputValue;
+     const reply= 200
+     res.sendStatus(reply);
+   });
+
+   app.get('/api/getparticipants',async (req, res) => {
+    // console.log("helloworld");
+     const message =await getParticipants();
+     console.log(message);
+     res.send(JSON.stringify(message));
    });

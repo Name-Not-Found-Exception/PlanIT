@@ -1,3 +1,8 @@
+async function participants(id){
+const response = await fetch(`/api/setselectedevent?value=${id}`);
+window.location.href="participants.html";
+}
+
 async function getList(){
     const response = await fetch('/api/geteventsorg');
     const data = await response.json();
@@ -17,9 +22,8 @@ async function getList(){
         <p class=\"time\" >Venue : ${i['location']}<br>
         date : ${i['date']}<br>
         time : ${i['time']}</p>
-        <button class=\"button\">view participants</button>
+        <button id=\"${i['title']}\" class=\"button\">view participants</button>
         </div>`;
-        console.log(table.innerHTML);
         // table.innerHTML += "<tr><td> " + i['title'] + "</td><td>"
         //  +i['location'] + "</td><td>"
         //  +i['date'] + "</td><td>"
@@ -35,7 +39,12 @@ async function getList(){
     //      <td><img src="image1.jpg" height="50"></td>
     //    </tr>
     });
-
+    var buttons = document.getElementsByTagName("button");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function(e) {
+            console.log(this.id);
+            participants(this.id);
+        });}
     // <div class="event-card">
     //     <img src="event1.jpg" alt="Event 1">
     //     <h3>Event 1</h3>
