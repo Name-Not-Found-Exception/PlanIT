@@ -3,8 +3,15 @@ let eventList;
 async function register(id){
 console.log(id);
 const response = await fetch(`/api/addusertoevent?value=${id}`);
-    const data = await response;
-    console.log(data.message);
+    console.log(response.status);
+    if(response.status==202)
+    alert('Registered Successfully');
+    else if(response.status==204){
+    alert('please login to continue');
+    window.location.href = 'login.html';
+    }
+    else
+    alert('You are already Registered for the event')
 }
 
 

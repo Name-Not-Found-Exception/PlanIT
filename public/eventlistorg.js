@@ -14,9 +14,10 @@ async function getList(){
         >
         <h3 >${i['title']}</h3>
         <p class=\"organizer\" >Organizer : ${i['organizer']}</p>
-        <p class=\"time\" >Venue : ${i['location']}</p>
-        <p class=\"date\" >date : ${i['date']}</p>
-        <p class=\"time\" >time : ${i['time']}</p>
+        <p class=\"time\" >Venue : ${i['location']}<br>
+        date : ${i['date']}<br>
+        time : ${i['time']}</p>
+        <button class=\"button\">view participants</button>
         </div>`;
         console.log(table.innerHTML);
         // table.innerHTML += "<tr><td> " + i['title'] + "</td><td>"

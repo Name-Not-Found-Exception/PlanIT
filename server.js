@@ -159,6 +159,10 @@ async function orgLogin(cred){
 }
 
 async function insertUsertoEvent(ename){
+  console.log(curUser['name']==undefined);
+  if(curUser['name']==undefined){
+    return 204;
+  }
   mongo = await MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }); 
   db = mongo.db("test");
   const usernopass = curUserNoPass();
@@ -167,8 +171,9 @@ async function insertUsertoEvent(ename){
   console.log(usernopass['name']);
   if(check.length==0){
   await db.collection(`${ename}`).insertOne(usernopass);
+  return 202;
   }
-  else return "Already registered";
+  else return 208;
 }
 
 
@@ -275,7 +280,7 @@ console.log(eventdata);
     // console.log("helloworld");
      const inputValue = req.query.value;
      console.log(inputValue);
-     await insertUsertoEvent(inputValue);
-     message = "Registered Successfully"
-     res.send({message});
+     const reply= await insertUsertoEvent(inputValue);
+     
+     res.sendStatus(reply);
    });
