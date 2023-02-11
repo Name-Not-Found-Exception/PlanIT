@@ -10,6 +10,7 @@ async function getList(){
     
     const events = data;
     console.log(data);
+    
     events.forEach(i => {
         //console.log(i['image']['filename']);
         console.log(i['title']);
@@ -39,6 +40,7 @@ async function getList(){
     //      <td><img src="image1.jpg" height="50"></td>
     //    </tr>
     });
+
     var buttons = document.getElementsByTagName("button");
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
@@ -52,5 +54,5 @@ async function getList(){
     //     <p>Date: 2023-03-01</p>
     //     <p>Time: 19:00</p>
     //   </div>
-}
+    }
 getList();

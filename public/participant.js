@@ -3,24 +3,27 @@ async function getList(){
     const data = await response.json();
     const participants = data;
     console.log(data);
-
+    var table= document.getElementById("table");
+    if(data.length==0){
+        table.innerHTML += "No participants yet";
+    }
+    else{
+    table.innerHTML +=`<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    </tr>`;
     participants.forEach(i => {
         //console.log(i['image']['filename']);
         console.log(i['name']);
-        var table= document.getElementById("table");
+        table= document.getElementById("table");
         table.innerHTML += `<tr>
         <td>${i['name']}</td>
         <td>${i['email']}</td>
         <td>${i['phone']}</td>
         </tr>`;
-        var buttons = document.getElementsByTagName("button");
-for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function(e) {
-        console.log(this.id);
-        register(this.id);
-    });
-}
+
 });
 
-}
+}}
 getList();
