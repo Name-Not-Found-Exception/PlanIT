@@ -1,3 +1,10 @@
+function exportExcel(){
+    console.log('ok');
+    var table = document.getElementById("table");
+    var wb = XLSX.utils.table_to_book(table, {sheet:"Sheet JS"});
+    XLSX.writeFile(wb, "participants.xlsx");
+    }
+
 async function getList(){
     const response = await fetch('/api/getparticipants');
     const data = await response.json();

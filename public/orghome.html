@@ -16,6 +16,29 @@
       .button:hover{
         background-color: #4CAF50;
         color: white;
+        animation-name: colorchange;
+        animation-duration: 500ms;
+      }
+      @keyframes colorchange {
+        0% {background-color: white;
+        color: black;}
+        100% {background-color: #4CAF50;
+          color: white;}
+        
+      }
+      #cardzero:hover{
+        animation-name: cardchange;
+        animation-duration: 2s;
+      }
+      @keyframes cardchange {
+        0% {background-color: white;
+        color: black;}
+        100% {background-color: #4CAF50;
+          }
+        
+      }
+      .buttonbg{
+        text-align: center;
       }
       input {
         background-color: #4CAF50;
@@ -27,6 +50,7 @@
         cursor: pointer;
       }
       .card {
+        
         width: 350px;
         height: 500px;
         text-align: center;
@@ -62,6 +86,8 @@
  
   /* Add styles for card on hover */
   .card:hover {
+    animation-name: cardchange;
+        animation-duration: 2s;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     transform: translateY(-4px);
   }
@@ -76,12 +102,17 @@
 </head>
 <body>
   <h1 style="text-align: center;">Your Events</h1>
-  <div><a href="event.html">
-    <input type="button" value="Create new Event"  ></a>
+  <div class = "buttonbg">
+    
   </div>
   <div class="scrollcard" id="cardsection">
-    <!-- Event 1 -->
-
+    <a href="event.html">
+    <div id="cardzero" class="card">
+      <img src = "uploads/addevent.png">
+      <h3 >Create Event </h3>
+      <p >Create a new event</p>
+      </div> <!-- Event 1 -->
+</a>
   <!-- Add more events as needed -->
 </div>
 </body>
