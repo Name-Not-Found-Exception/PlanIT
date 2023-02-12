@@ -309,3 +309,4 @@ console.log(eventdata);
      console.log(message);
      res.send(JSON.stringify(message));
    });
+   module.exports = app;
