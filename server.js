@@ -10,7 +10,7 @@ async function insertUserDetails(userDetails){
     let isok = false;
     
     
-    mongo = await MongoClient.connect("mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true }); 
+    mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
     db = mongo.db("test");
     console.log(userDetails['email']);
     const givenmail = userDetails['email'];
