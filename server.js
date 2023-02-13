@@ -10,7 +10,7 @@ async function insertUserDetails(userDetails){
     let isok = false;
     
     
-    mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+    mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
     db = mongo.db("test");
     console.log(userDetails['email']);
     const givenmail = userDetails['email'];
@@ -32,7 +32,7 @@ async function insertOrgDetails(orgDetails){
   let isok = false;
   
   
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   console.log(orgDetails['email']);
   const givenmail = orgDetails['email'];
@@ -53,7 +53,7 @@ async function insertOrgDetails(orgDetails){
 
 
 async function getUsers(){
-    mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+    mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
     db = mongo.db("test");
     let res = await db.collection('users').find({}).toArray();
     
@@ -63,7 +63,7 @@ async function getUsers(){
     }
 async function insertEvent(data){
  
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   isexist = await db.collection('events').find({title: data['title']}).limit(1).toArray();
   if(isexist.length==0){
@@ -79,7 +79,7 @@ async function insertEvent(data){
 
 async function getEvents(){
 
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   let res = await db.collection('events').find({}).toArray();
   
@@ -89,7 +89,7 @@ async function getEvents(){
 
 async function getEventsOrg(){
 
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   let res = await db.collection('events').find({organizer:curUser['name']}).toArray();
   console.log(curUser['name']);
@@ -100,7 +100,7 @@ async function getEventsOrg(){
 
 
 async function login(cred){
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   console.log(cred["email"]);
   const givenmail = cred['email'];
@@ -135,7 +135,7 @@ function curUserNoPass(){
 }
 
 async function orgLogin(cred){
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   console.log(cred["email"]);
   const givenmail = cred['email'];
@@ -164,7 +164,7 @@ async function insertUsertoEvent(ename){
   if(curUser['name']==undefined){
     return 204;
   }
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   const usernopass = curUserNoPass();
   check = await db.collection(`${ename}`).find({"email": usernopass['email']}).limit(1).toArray();
@@ -178,7 +178,7 @@ async function insertUsertoEvent(ename){
 }
 
 async function getParticipants(){
-  mongo = await MongoClient.connect(process.env.MONGO_URI, { useNewUrlParser: true }); 
+  mongo = await MongoClient.connect(process.env.MONGO_URI||'mongodb+srv://namenotfound:shravantoxica@planit.zo1vmdu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true }); 
   db = mongo.db("test");
   console.log("id is "+eventId);
   let list = await db.collection(eventId).find({}).toArray();

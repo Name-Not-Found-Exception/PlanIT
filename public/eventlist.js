@@ -27,7 +27,7 @@ async function getList(){
         console.log(i['title']);
         var table= document.getElementById("cardsection");
         table.innerHTML += `<div id = \"${i[name]}\" class=\"card\">
-        <img  src = "http://localhost:3000/uploads/${i['image']['filename']}"
+        <img  src = "uploads/${i['image']['filename']}"
         >
         <h3 >${i['title']}</h3>
         <p class=\"organizer\" >Organizer : ${i['organizer']}</p>
